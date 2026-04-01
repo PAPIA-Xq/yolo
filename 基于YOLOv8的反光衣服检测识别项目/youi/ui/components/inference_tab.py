@@ -519,10 +519,11 @@ class InferenceTab(QWidget):
             save_results=self.save_results.isChecked()
         )
 
-        self.inference_thread = QThread()
+        self.inference_thread = QThread()#创建后台线程
+        #将work移动到独立线程
         self.inference_worker.moveToThread(self.inference_thread)
         
-        # Connect signals
+        # 信号槽连接
         self.inference_worker.progress_update.connect(self.update_progress)
         self.inference_worker.log_update.connect(self.log_message)
         self.inference_worker.stats_update.connect(self.update_stats)
@@ -531,7 +532,7 @@ class InferenceTab(QWidget):
         self.inference_worker.inference_error.connect(self.on_inference_error)
         self.inference_thread.started.connect(self.inference_worker.run)
         
-        # Start inference
+        # 启动后台任务
         self.inference_thread.start()
     
     def stop_inference(self):

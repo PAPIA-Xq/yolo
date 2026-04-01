@@ -63,17 +63,17 @@ class InferenceWorker(QObject):
             
             # Run inference based on mode
             # Run inference based on mode
-            if self.is_camera_mode:
-                self.run_camera_inference()
+            if self.is_camera_mode:#判断模式
+                self.run_camera_inference()#摄像头
             elif self.is_video_mode:
-                self.run_video_inference()
+                self.run_video_inference()#视频
             elif self.is_folder_mode:
-                self.run_folder_inference()
+                self.run_folder_inference()#文件夹
             else:
                 if ';' in self.input_path:
                     self.run_multiple_images_inference()
                 else:
-                    self.run_single_image_inference()
+                    self.run_single_image_inference()#单张照片
 
             if not self.should_stop:
                 self.inference_complete.emit()
@@ -86,7 +86,7 @@ class InferenceWorker(QObject):
         """Run inference on a video file."""
         self.log_update.emit("对视频进行推理...")
 
-        cap = cv2.VideoCapture(self.input_path)
+        cap = cv2.VideoCapture(self.input_path)#打开视频文件
         if not cap.isOpened():
             raise ValueError(f"无法打开视频文件: {self.input_path}")
 
@@ -135,7 +135,7 @@ class InferenceWorker(QObject):
         except ValueError:
             raise ValueError(f"摄像头编号无效: {self.input_path}")
 
-        cap = cv2.VideoCapture(cam_index)
+        cap = cv2.VideoCapture(cam_index)#打开摄像头
         if not cap.isOpened():
             raise ValueError(f"无法打开摄像头 {cam_index}")
 

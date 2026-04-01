@@ -54,14 +54,14 @@ class SettingsTab(QWidget):
         """Create and arrange UI elements."""
         main_layout = QVBoxLayout(self)
         
-        # Create tabs for different settings categories
+        #创建分类标签页（通用、路径、训练、测试）
         settings_tabs = QTabWidget()
         
-        # General settings tab
+        #  通用设置（GPU、模型、主题）
         general_tab = QWidget()
         general_layout = QFormLayout(general_tab)
         
-        # Hardware settings
+        # 是否用 GPU、选择显卡编号
 
         hardware_layout = QFormLayout()
 
@@ -77,7 +77,7 @@ class SettingsTab(QWidget):
         hardware_layout.addRow("GPU设备:", self.gpu_device_spin)
 
 
-        # Default model settings
+        #选择默认 YOLO 模型
 
         model_layout = QFormLayout()
 
@@ -92,7 +92,7 @@ class SettingsTab(QWidget):
         model_layout.addRow("默认模型:", self.model_combo)
 
 
-        # UI settings group
+        #  选择界面皮肤
         ui_group = QGroupBox("界面设置")
         ui_layout = QFormLayout()
         
@@ -117,7 +117,7 @@ class SettingsTab(QWidget):
 
         general_layout.addWidget(ui_group)
         
-        # Path settings tab
+        # 路径设置
         paths_tab = QWidget()
         paths_layout = QFormLayout(paths_tab)
         

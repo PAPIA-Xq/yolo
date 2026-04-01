@@ -56,18 +56,18 @@ class TestingWorker(QObject):
             
             # Load YOLO model
             self.load_model()
-            
+
             if self.should_stop:
                 self.log_update.emit("Testing stopped")
                 return
-            
-            # First try to create a YOLO-compatible dataset for proper evaluation
+
+            #自动整理成Yolo标准数据集
             if self.prepare_yolo_compatible_dataset():
                 self.log_update.emit("使用标准验证方式评估模型性能...")
                 self.run_standard_validation()
             else:
                 try:    
-                    # Process test data based on format
+                    # 根据格式处理测试数据
                     if self.dataset_format == "COCO":
                         self.test_coco_dataset()
                     elif self.dataset_format == "VOC":

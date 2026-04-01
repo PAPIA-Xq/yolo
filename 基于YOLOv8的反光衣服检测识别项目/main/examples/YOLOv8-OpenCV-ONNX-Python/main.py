@@ -7,10 +7,10 @@ from ultralytics.utils import ROOT, yaml_load
 from ultralytics.utils.checks import check_yaml
 
 CLASSES = yaml_load(check_yaml('coco128.yaml'))['names']
-
+#每个类别设置颜色
 colors = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
-
+#画框函数
 def draw_bounding_box(img, class_id, confidence, x, y, x_plus_w, y_plus_h):
     label = f'{CLASSES[class_id]} ({confidence:.2f})'
     color = colors[class_id]
@@ -22,6 +22,7 @@ def main(onnx_model, input_image):
     model: cv2.dnn.Net = cv2.dnn.readNetFromONNX(onnx_model)
     original_image: np.ndarray = cv2.imread(input_image)
     [height, width, _] = original_image.shape
+    #图像预处理，将图片都设置成正方形
     length = max((height, width))
     image = np.zeros((length, length, 3), np.uint8)
     image[0:height, 0:width] = original_image

@@ -26,11 +26,11 @@ int main(int argc, char **argv)
     // Note that in this example the classes are hard-coded and 'classes.txt' is a place holder.
     Inference inf(projectBasePath + "/yolov8s.onnx", cv::Size(640, 480), "classes.txt", runOnGPU);
 
-    std::vector<std::string> imageNames;
-    imageNames.push_back(projectBasePath + "/ultralytics/assets/bus.jpg");
-    imageNames.push_back(projectBasePath + "/ultralytics/assets/zidane.jpg");
+    std::vector<std::string> imageNames;//定义一个图片路径
+    imageNames.push_back(projectBasePath + "/ultralytics/assets/bus.jpg");//放入两张ultrslytics自带的测试图
+    imageNames.push_back(projectBasePath + "/ultralytics/assets/zidane.jpg");//依次检测这两张图
 
-    for (int i = 0; i < imageNames.size(); ++i)
+    for (int i = 0; i < imageNames.size(); ++i)//遍历图片
     {
         cv::Mat frame = cv::imread(imageNames[i]);
 
